@@ -1,0 +1,357 @@
+[
+  {
+    "sha": "267dff2672d73e4a2d527610aafd62803e9c8652",
+    "commit": {
+      "author": {
+        "name": "Samuel Gratzl",
+        "email": "samuel_gratzl@gmx.at",
+        "date": "2014-02-21T22:19:00Z"
+      },
+      "committer": {
+        "name": "Samuel Gratzl",
+        "email": "samuel_gratzl@gmx.at",
+        "date": "2014-02-21T22:19:00Z"
+      },
+      "message": "fix #1810 no single numerical columns",
+      "tree": {
+        "sha": "14f596c908c1665f4ee2fa6b2efd29e816f935a6",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/git/trees/14f596c908c1665f4ee2fa6b2efd29e816f935a6"
+      },
+      "url": "https://api.github.com/repos/Caleydo/caleydo/git/commits/267dff2672d73e4a2d527610aafd62803e9c8652",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/Caleydo/caleydo/commits/267dff2672d73e4a2d527610aafd62803e9c8652",
+    "html_url": "https://github.com/Caleydo/caleydo/commit/267dff2672d73e4a2d527610aafd62803e9c8652",
+    "comments_url": "https://api.github.com/repos/Caleydo/caleydo/commits/267dff2672d73e4a2d527610aafd62803e9c8652/comments",
+    "author": {
+      "login": "sgratzl",
+      "id": 4129778,
+      "avatar_url": "https://gravatar.com/avatar/f387f3cfdd57977032854860efd4e09b?d=https%3A%2F%2Fidenticons.github.com%2F532ee1a0aee25f429a189024438f09cb.png&r=x",
+      "gravatar_id": "f387f3cfdd57977032854860efd4e09b",
+      "url": "https://api.github.com/users/sgratzl",
+      "html_url": "https://github.com/sgratzl",
+      "followers_url": "https://api.github.com/users/sgratzl/followers",
+      "following_url": "https://api.github.com/users/sgratzl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sgratzl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sgratzl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sgratzl/subscriptions",
+      "organizations_url": "https://api.github.com/users/sgratzl/orgs",
+      "repos_url": "https://api.github.com/users/sgratzl/repos",
+      "events_url": "https://api.github.com/users/sgratzl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sgratzl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "sgratzl",
+      "id": 4129778,
+      "avatar_url": "https://gravatar.com/avatar/f387f3cfdd57977032854860efd4e09b?d=https%3A%2F%2Fidenticons.github.com%2F532ee1a0aee25f429a189024438f09cb.png&r=x",
+      "gravatar_id": "f387f3cfdd57977032854860efd4e09b",
+      "url": "https://api.github.com/users/sgratzl",
+      "html_url": "https://github.com/sgratzl",
+      "followers_url": "https://api.github.com/users/sgratzl/followers",
+      "following_url": "https://api.github.com/users/sgratzl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sgratzl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sgratzl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sgratzl/subscriptions",
+      "organizations_url": "https://api.github.com/users/sgratzl/orgs",
+      "repos_url": "https://api.github.com/users/sgratzl/repos",
+      "events_url": "https://api.github.com/users/sgratzl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sgratzl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "33729a66a2843f503d52742dd8be490a91cd9aac",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/33729a66a2843f503d52742dd8be490a91cd9aac",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/33729a66a2843f503d52742dd8be490a91cd9aac"
+      }
+    ]
+  },
+  {
+    "sha": "33729a66a2843f503d52742dd8be490a91cd9aac",
+    "commit": {
+      "author": {
+        "name": "Samuel Gratzl",
+        "email": "samuel_gratzl@gmx.at",
+        "date": "2014-02-21T21:01:40Z"
+      },
+      "committer": {
+        "name": "Samuel Gratzl",
+        "email": "samuel_gratzl@gmx.at",
+        "date": "2014-02-21T21:18:14Z"
+      },
+      "message": "fix #1812 filter samples according to analyzed data",
+      "tree": {
+        "sha": "43f0a95837d331be777037aa650ce3a0a9303f0a",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/git/trees/43f0a95837d331be777037aa650ce3a0a9303f0a"
+      },
+      "url": "https://api.github.com/repos/Caleydo/caleydo/git/commits/33729a66a2843f503d52742dd8be490a91cd9aac",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/Caleydo/caleydo/commits/33729a66a2843f503d52742dd8be490a91cd9aac",
+    "html_url": "https://github.com/Caleydo/caleydo/commit/33729a66a2843f503d52742dd8be490a91cd9aac",
+    "comments_url": "https://api.github.com/repos/Caleydo/caleydo/commits/33729a66a2843f503d52742dd8be490a91cd9aac/comments",
+    "author": {
+      "login": "sgratzl",
+      "id": 4129778,
+      "avatar_url": "https://gravatar.com/avatar/f387f3cfdd57977032854860efd4e09b?d=https%3A%2F%2Fidenticons.github.com%2F532ee1a0aee25f429a189024438f09cb.png&r=x",
+      "gravatar_id": "f387f3cfdd57977032854860efd4e09b",
+      "url": "https://api.github.com/users/sgratzl",
+      "html_url": "https://github.com/sgratzl",
+      "followers_url": "https://api.github.com/users/sgratzl/followers",
+      "following_url": "https://api.github.com/users/sgratzl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sgratzl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sgratzl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sgratzl/subscriptions",
+      "organizations_url": "https://api.github.com/users/sgratzl/orgs",
+      "repos_url": "https://api.github.com/users/sgratzl/repos",
+      "events_url": "https://api.github.com/users/sgratzl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sgratzl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "sgratzl",
+      "id": 4129778,
+      "avatar_url": "https://gravatar.com/avatar/f387f3cfdd57977032854860efd4e09b?d=https%3A%2F%2Fidenticons.github.com%2F532ee1a0aee25f429a189024438f09cb.png&r=x",
+      "gravatar_id": "f387f3cfdd57977032854860efd4e09b",
+      "url": "https://api.github.com/users/sgratzl",
+      "html_url": "https://github.com/sgratzl",
+      "followers_url": "https://api.github.com/users/sgratzl/followers",
+      "following_url": "https://api.github.com/users/sgratzl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/sgratzl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/sgratzl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/sgratzl/subscriptions",
+      "organizations_url": "https://api.github.com/users/sgratzl/orgs",
+      "repos_url": "https://api.github.com/users/sgratzl/repos",
+      "events_url": "https://api.github.com/users/sgratzl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/sgratzl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "4cfe6ac06699004d238eb117d0d70638faec06dc",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/4cfe6ac06699004d238eb117d0d70638faec06dc",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/4cfe6ac06699004d238eb117d0d70638faec06dc"
+      }
+    ]
+  },
+  {
+    "sha": "4cfe6ac06699004d238eb117d0d70638faec06dc",
+    "commit": {
+      "author": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:56:40Z"
+      },
+      "committer": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:56:40Z"
+      },
+      "message": "removed dependency from parcoords, which caused compile issue",
+      "tree": {
+        "sha": "10e9a4f08f2b15976eb8b0c9f25eadd252e4e591",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/git/trees/10e9a4f08f2b15976eb8b0c9f25eadd252e4e591"
+      },
+      "url": "https://api.github.com/repos/Caleydo/caleydo/git/commits/4cfe6ac06699004d238eb117d0d70638faec06dc",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/Caleydo/caleydo/commits/4cfe6ac06699004d238eb117d0d70638faec06dc",
+    "html_url": "https://github.com/Caleydo/caleydo/commit/4cfe6ac06699004d238eb117d0d70638faec06dc",
+    "comments_url": "https://api.github.com/repos/Caleydo/caleydo/commits/4cfe6ac06699004d238eb117d0d70638faec06dc/comments",
+    "author": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "e278d118493c76b570377a5b122a518e57b75d9c",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/e278d118493c76b570377a5b122a518e57b75d9c",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/e278d118493c76b570377a5b122a518e57b75d9c"
+      }
+    ]
+  },
+  {
+    "sha": "e278d118493c76b570377a5b122a518e57b75d9c",
+    "commit": {
+      "author": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:50:18Z"
+      },
+      "committer": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:50:18Z"
+      },
+      "message": "Merge branch 'develop' of https://github.com/Caleydo/caleydo.git into develop",
+      "tree": {
+        "sha": "c41e0abac2a08aff617b10e5084cbc11cbba12e7",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/git/trees/c41e0abac2a08aff617b10e5084cbc11cbba12e7"
+      },
+      "url": "https://api.github.com/repos/Caleydo/caleydo/git/commits/e278d118493c76b570377a5b122a518e57b75d9c",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/Caleydo/caleydo/commits/e278d118493c76b570377a5b122a518e57b75d9c",
+    "html_url": "https://github.com/Caleydo/caleydo/commit/e278d118493c76b570377a5b122a518e57b75d9c",
+    "comments_url": "https://api.github.com/repos/Caleydo/caleydo/commits/e278d118493c76b570377a5b122a518e57b75d9c/comments",
+    "author": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "5618654150dffb351b5841c2e3c14c87eabc6121",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/5618654150dffb351b5841c2e3c14c87eabc6121",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/5618654150dffb351b5841c2e3c14c87eabc6121"
+      },
+      {
+        "sha": "0fec1b361bd4a1bb24f88b1073671c587fc71d9e",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/0fec1b361bd4a1bb24f88b1073671c587fc71d9e",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/0fec1b361bd4a1bb24f88b1073671c587fc71d9e"
+      }
+    ]
+  },
+  {
+    "sha": "5618654150dffb351b5841c2e3c14c87eabc6121",
+    "commit": {
+      "author": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:50:09Z"
+      },
+      "committer": {
+        "name": "Christian Partl",
+        "email": "partl@icg.tugraz.at",
+        "date": "2014-02-21T18:50:09Z"
+      },
+      "message": "can now add a custom minsizeprovider to a glelement; attempt to address\n#1809",
+      "tree": {
+        "sha": "11ccdf9c704ede9d670f039c9b32d361a8ac0e48",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/git/trees/11ccdf9c704ede9d670f039c9b32d361a8ac0e48"
+      },
+      "url": "https://api.github.com/repos/Caleydo/caleydo/git/commits/5618654150dffb351b5841c2e3c14c87eabc6121",
+      "comment_count": 0
+    },
+    "url": "https://api.github.com/repos/Caleydo/caleydo/commits/5618654150dffb351b5841c2e3c14c87eabc6121",
+    "html_url": "https://github.com/Caleydo/caleydo/commit/5618654150dffb351b5841c2e3c14c87eabc6121",
+    "comments_url": "https://api.github.com/repos/Caleydo/caleydo/commits/5618654150dffb351b5841c2e3c14c87eabc6121/comments",
+    "author": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "committer": {
+      "login": "cpartl",
+      "id": 4134949,
+      "avatar_url": "https://gravatar.com/avatar/728d9d66d288fbc7bbca705b91217317?d=https%3A%2F%2Fidenticons.github.com%2F4870642efadf8b0b8b31cfe98f1c18ea.png&r=x",
+      "gravatar_id": "728d9d66d288fbc7bbca705b91217317",
+      "url": "https://api.github.com/users/cpartl",
+      "html_url": "https://github.com/cpartl",
+      "followers_url": "https://api.github.com/users/cpartl/followers",
+      "following_url": "https://api.github.com/users/cpartl/following{/other_user}",
+      "gists_url": "https://api.github.com/users/cpartl/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/cpartl/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/cpartl/subscriptions",
+      "organizations_url": "https://api.github.com/users/cpartl/orgs",
+      "repos_url": "https://api.github.com/users/cpartl/repos",
+      "events_url": "https://api.github.com/users/cpartl/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/cpartl/received_events",
+      "type": "User",
+      "site_admin": false
+    },
+    "parents": [
+      {
+        "sha": "6ebbd2ee0cadfbcbc72d8ddf2ff950c0925e3965",
+        "url": "https://api.github.com/repos/Caleydo/caleydo/commits/6ebbd2ee0cadfbcbc72d8ddf2ff950c0925e3965",
+        "html_url": "https://github.com/Caleydo/caleydo/commit/6ebbd2ee0cadfbcbc72d8ddf2ff950c0925e3965"
+      }
+    ]
+  }
+]

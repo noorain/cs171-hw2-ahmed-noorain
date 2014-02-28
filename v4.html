@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Homework 2 Graph</title>
+<style>
+  .link {
+    stroke: gray;
+    stroke-width: 1.5px;
+  }
+
+  .node {
+    fill: #66CC66;
+    stroke: #000;
+    stroke-width: 1px;
+  }
+
+  .node:hover {
+    fill: red;
+  }
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+  <form>
+  Layout:
+    <label><input type="radio" name="layout" value="force" checked> Force</label>
+    <label><input type="radio" name="layout" value="random" > Random</label>
+    <label><input type="radio" name="layout" value="radial"> Radial</label>  
+    <label><input type="radio" name="layout" value="line"> Line</label>
+    <label><input type="radio" name="layout" value="line_cat"> Line by Category</label>
+  </form>
+  <form>
+  Color:
+    <label><input type="radio" name="color" value="nocolor" checked> None</label>
+    <label><input type="radio" name="color" value="color_cat" > Category</label>
+  </form>
+  <form>
+  Size:
+    <label><input type="radio" name="size" value="nosize" checked> None</label>
+    <label><input type="radio" name="size" value="size_cat" > Category</label>
+  </form>
+<script>
+
+function fetch(parent) {
+   d3.json("https://api.github.com/repos/mbostock/d3/commits?sha=" + parent + "&client_id=940b2dea8183973b6212&client_secret=543f8aabfca15adf2070b7ff49530b4200da6e38"
+        , function(link1){
+          console.log("creating parent to link")
+            graph["nodes"].push({
+              "name": parent, 
+              "cat": link1[0].committer.id, 
+              "committer": link1[0].committer.id});
+            //console.log(graph.links)
+      });
+ }
+
+
+var fill = d3.scale.category10();
+
+var graph = {nodes:[], links:[]};
+
+var nb_nodes = 100, nb_cat = 10;
+
+var findNode = function (name) {
+        for (var i in graph["nodes"]) if (graph["nodes"][i]["name"] === name) return graph["nodes"][i];
+    }
+
+// Read data for a specific branch, this closes at end of the script.
+d3.json("https://api.github.com/repos/mbostock/d3/commits?per_page=1000&sha=adopt&client_id=940b2dea8183973b6212&client_secret=543f8aabfca15adf2070b7ff49530b4200da6e38", function(error, mainlink){
+
+var width = 9000,
+    height = 900;
+
+var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+
+
+var fill = d3.scale.category10();
+
+var graph = {nodes:[], links:[]};
+var nb_nodes = 100, nb_cat = 10;
+var index_cc = 0;
+var nodeMap = {};
+
+var findNodecat = function (id) {
+        for (var i in graph["nodes"]) { if (graph["nodes"][i]["committer"] === id) return graph["nodes"][i].cat;
+      }
+    }
+
+var findNode = function (name) {
+        for (var i in graph["nodes"]) if (graph["nodes"][i]["name"] === name) return graph["nodes"][i];
+    }
+
+
+
+
+mainlink.forEach(function(link) {
+  console.log("Linking:", link.sha, " with ", link.parents[0].sha)
+  console.log("Dealing with left node")
+  if(!findNode(link.sha)){
+    cat_id = index_cc
+    index_cc++;
+    graph["nodes"].push({"name": link.sha, cat: cat_id, "committer": link.committer.id});    
+  }
+  
+  console.log("Dealing with right node");
+  //if(!graph.nodes[link.parents[0].sha]){
+    
+    fetch(link.parents[0].sha);
+    if(!findNode(link.parents[0].sha)){
+    cat_id = index_cc
+    index_cc++;
+    graph["nodes"].push({"name": link.parents[0].sha, cat: cat_id, "committer": link.committer.id});
+    }
+  console.log("Final Step: Linking them.")
+  graph["links"].push({"source":findNode(link.sha),"target":findNode(link.parents[0].sha)});
+  //console.log("links:", graph.links)
+});
+
+
+//console.log("Distinct Values", graph["nodes"])
+ // console.log("links:", graph.links)
+// Generate the force layout
+var force = d3.layout.force()
+    .size([width, height])
+    .charge(-50)
+    .linkDistance(10)
+    .on("tick", tick)
+    .on("start", function(d) {})
+    .on("end", function(d) {})
+
+var path = svg.append("svg:g").selectAll("path")
+    .data(graph.links)
+  .enter().append("svg:path")
+  //.attr("d","M100,5L20,20L40,10L60,40L80,5L100,60")
+    //.attr("class", function(d) { return "link " + d.type; })
+    .attr("marker-end", "url(#end)");
+  
+  var text = svg.append("svg:g").selectAll("text")
+    .data(graph.nodes)
+  .enter().append("svg:text")
+  //.attr("d","M100,5L20,20L40,10L60,40L80,5L100,60")
+    //.attr("class", function(d) { return "link " + d.type; })
+    .attr("marker-end", "url(#end)");
+  
+
+
+
+function tick(d) {
+
+  graph_update(0);
+}
+
+function random_layout() {
+  
+  force.stop();
+
+  graph.nodes.forEach(function(d, i) {
+    d.x = width/4 + 2*width*Math.random()/4;
+    d.y = height/4 + 2*height*Math.random()/4;
+  })
+  
+  graph_update(500);
+}
+
+function force_layout() {
+
+ force.nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+}
+
+function line_layout() {
+
+  force.stop();
+
+  graph.nodes.forEach(function(d, i) {
+    d.y = height/2;
+  })
+
+  graph_update(500);
+}
+
+function line_cat_layout() {
+
+  force.stop();
+
+  var uniq = [] 
+
+  graph["nodes"].forEach(function(d, i) {
+  if(uniq.indexOf(d.committer) == -1)
+    uniq.push(d.committer)
+  })
+
+ 
+
+
+  //console.log("Values in Uniq:", uniq)
+var yScale = d3.scale.ordinal().rangeRoundBands([0, height], .8, 0)
+.domain(uniq)
+
+//console.log("graph.nodes.length", graph.nodes.length, "width", width)
+var xScale = d3.scale.linear()
+.domain([0,graph.nodes.length])
+
+  graph.nodes.forEach(function(d, i) {
+   // console.log("xScale(i)", i, ":", xScale(i))
+    d.x = 100+ xScale(i)*3000;
+    d.y = 200 + yScale(d.committer)-100;
+    //console.log("d.committer:", d.committer, "d.y:", d.y)
+  })
+
+  svg.selectAll("text")
+              .attr("x", 0)
+              .attr("y", function(d){return d.y})
+              //.attr("text-anchor", "middle")
+              .attr("dy", "0.5em")
+              .text(function(d){return d.committer})
+
+  graph_update(500);
+}
+
+function radial_layout() {
+
+  force.stop();
+
+  var r = height/2;
+
+  var arc = d3.svg.arc()
+          .outerRadius(r);
+
+  var pie = d3.layout.pie()
+  .sort(function(a, b) { return a.cat - b.cat;})
+          .value(function(d, i) { return 1; }); // equal share for each point
+
+  graph.nodes = pie(graph.nodes).map(function(d, i) {
+    d.innerRadius = 0;
+    d.outerRadius = r;
+    d.data.x = arc.centroid(d)[0]+height/2;
+    d.data.y = arc.centroid(d)[1]+width/2;
+    d.data.endAngle = d.endAngle; 
+    d.data.startAngle = d.startAngle; 
+    return d.data;
+  })
+
+  graph_update(500);
+}
+
+function category_color() {
+  d3.selectAll("circle").transition().duration(500).style("fill", function(d) { return fill(d.cat); });
+}
+
+function category_size() {
+  d3.selectAll("circle").transition().duration(500).attr("r", function(d) { return Math.sqrt((d.cat+1)*10); });
+}
+
+function graph_update(delay) {
+  link.transition().duration(delay)
+      .attr("x1", function(d) { return d.target.x; })
+      .attr("y1", function(d) { return d.target.y; })
+      .attr("x2", function(d) { return d.source.x; })
+      .attr("y2", function(d) { return d.source.y; });
+
+  node.transition().duration(delay)
+      .attr("transform", function(d) { 
+        return "translate("+d.x+","+d.y+")"; 
+      });
+
+path.attr('d', function(d) {
+  //console.log("TICK d", d)
+    var deltaX = d.target.x - d.source.x,
+        deltaY = d.target.y - d.source.y,
+        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+        normX = deltaX / dist,
+        normY = deltaY / dist,
+        sourcePadding = d.left ? 17 : 12,
+        targetPadding = d.right ? 17 : 12,
+        sourceX = d.source.x + (sourcePadding * normX),
+        sourceY = d.source.y + (sourcePadding * normY),
+        targetX = d.target.x - (targetPadding * normX),
+        targetY = d.target.y - (targetPadding * normY);
+    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+  });
+
+node.on("mouseover", function(d) {
+            d3.select(this).style("fill", "#999");
+            svg.append("text")
+              .attr("x", d.x - 10 )
+              .attr("y", d.y - 10 )
+             .attr("font-family", "Arial")
+      .attr("font-weight", "bold")
+      .attr("font-size", "16px")
+      .attr("fill", "blue")
+     //.attr("stroke", "white")
+      //.attr("stroke-width", ".2px")
+
+//              .attr("fill", "black")
+//.attr("x", "-46px")
+                   // .attr("y", "-36.5px")
+              .attr("id", "tooltip")
+              .html("test" +  "<br/>" + "test")
+//              .html("Node id:" + d.index + "<br/>"+ "name:" + d.name + " committer:" + d.committer)
+            //fade(.1);
+        })
+        .on("mouseout", function(d) {
+          d3.select("#tooltip").remove();
+            if (d.style == 'filled') {
+                d3.select(this).style("fill",d.color);fade(1);
+            } else {
+                d3.select(this).style("stroke",d.color);
+                d3.select(this).style("fill","black");
+            }
+            //fade(1);
+        })
+
+
+
+}
+
+
+d3.select("input[value=\"force\"]").on("click", force_layout);
+d3.select("input[value=\"random\"]").on("click", random_layout);
+d3.select("input[value=\"line\"]").on("click", line_layout);
+d3.select("input[value=\"line_cat\"]").on("click", line_cat_layout);
+d3.select("input[value=\"radial\"]").on("click", radial_layout);
+
+d3.select("input[value=\"nocolor\"]").on("click", function() {
+  d3.selectAll("circle").transition().duration(500).style("fill", "#66CC66");
+})
+
+d3.select("input[value=\"color_cat\"]").on("click", category_color);
+
+d3.select("input[value=\"nosize\"]").on("click", function() {
+  d3.selectAll("circle").transition().duration(500).attr("r", 5);
+})
+
+d3.select("input[value=\"size_cat\"]").on("click", category_size);
+//console.log("Loadid")
+var link = svg.selectAll(".link")
+              .data(graph.links)
+            .enter().append("line")
+              .attr("class", "link")
+
+
+var node = svg.selectAll(".node")
+              .data(graph.nodes)
+            .enter()
+              .append("g").attr("class", "node");
+
+
+
+node.append("circle")
+    .attr("r", 5)
+
+// build the arrow.
+svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+
+force_layout();
+radial_layout()
+line_cat_layout() 
+
+})
+</script>
+</body>
+</html>

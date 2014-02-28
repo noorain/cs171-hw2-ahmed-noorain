@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Homework 2 Graph</title>
+<style>
+  .link {
+    stroke: gray;
+    stroke-width: 1.5px;
+  }
+
+  .node {
+    fill: #66CC66;
+    stroke: #000;
+    stroke-width: 1px;
+  }
+
+  .node:hover {
+    fill: red;
+  }
+
+  .tooltip { position: absolute; somestyleattributteshere;  pointer-events: none; }
+  .tooltip.hidden { display: none;}
+
+  .word_no
+  {
+opacity: 1e-6;
+  }
+
+.word
+  {
+    fill: red;
+opacity: 1e-6;
+  }
+
+  .d3-tip {
+  line-height: 1;
+  font-weight: bold;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: blue;
+  border-radius: 2px;
+}
+
+  
+
+
+</style>
+<body>
+<script src="http://d3js.org/d3.v3.min.js"></script>
+  <form>
+  Layout:
+    <label><input type="radio" name="layout" value="force" checked> Force</label>
+    <label><input type="radio" name="layout" value="random" > Random</label>
+    <label><input type="radio" name="layout" value="radial"> Radial</label>  
+    <label><input type="radio" name="layout" value="line"> Line</label>
+    <label><input type="radio" name="layout" value="line_cat"> Line by Category</label>
+  </form>
+  <form>
+  Color:
+    <label><input type="radio" name="color" value="nocolor" checked> None</label>
+    <label><input type="radio" name="color" value="color_cat" > Category</label>
+  </form>
+  <form>
+  Size:
+    <label><input type="radio" name="size" value="nosize" checked> None</label>
+    <label><input type="radio" name="size" value="size_cat" > Category</label>
+  </form>
+<script>
+
+branch_name = ""
+repo_name  = ""
+console.log("STARTTTTINGGGGGGGG")
+
+/*d3.json("https://api.github.com/repos/mbostock/d3/branches", function(error, d1){
+  d1.forEach(function(branch) {
+    data = branch
+    console.log("branch", branch)
+  
+  */ 
+    d3.json("https://api.github.com/repos/mbostock/d3/commits?per_page=10&sha=adopt", function(error, data){
+//console.log(d1);
+var width = 900,
+    height = 900;
+ var  parent_committer = ""
+var svg = d3.select("body").append("svg")
+            .attr("width", width)
+            .attr("height", height);
+
+
+
+var fill = d3.scale.category10();
+
+var graph = {nodes:[], links:[]};
+
+
+var nb_nodes = 100, nb_cat = 10;
+var index_cc = 0;
+var nodeMap = {};
+
+var findNodecat = function (id) {
+        for (var i in graph["nodes"]) { if (graph["nodes"][i]["committer"] === id) return graph["nodes"][i].cat;
+      }
+    }
+
+var findNode = function (name) {
+        for (var i in graph["nodes"]) if (graph["nodes"][i]["name"] === name) return graph["nodes"][i];
+    }
+
+data.forEach(function(link) {
+  console.log("commits for branch adopt", link)
+  //console.log("findNodecat(link.sha)", findNodecat(link.sha))
+
+  if(!findNode(link.sha)){
+    //console.log("findNodecat(link.committer.id)", findNodecat(link.committer.id))
+    if(findNodecat(link.committer.id))
+      cat_id = findNodecat(link.committer.id)
+    else{
+      cat_id = index_cc
+      index_cc++;
+    }
+    console.log("Pushing to node:", "name", link.sha,  "cat:", cat_id, "committer", link.committer.id)
+    graph["nodes"].push({"name": link.sha, "cat": cat_id, "committer": link.committer.id});
+    
+  }
+
+  if(!graph.nodes[link.parents[0].sha]){
+  //d3.json("https://api.github.com/repos/Caleydo/caleydo/commits/" + link.parents[0].sha, function(error, data_c){
+    //console.log("**data_c**", data_c)
+    //console.log("findNodecat(link.committer.id)", findNodecat(link.committer.id))
+    if(findNodecat(link.committer.id))
+      cat_id = findNodecat(link.committer.id)
+    else{
+      cat_id = index_cc
+      index_cc++;
+    }
+    d3.json("https://api.github.com/repos/mbostock/d3/commits/" + link.parents[0].sha, function(error, pdata){
+
+      console.log("PDATA:" , pdata.sha , "cid", pdata.committer.id)
+      parent_committer = pdata.committer.id
+      console.log("parent_committer", parent_committer)
+      console.log("Pushing to node:", "name", link.parents[0].sha,  "cat:", cat_id, "note parent committer:", parent_committer)
+      graph["nodes"].push({"name": link.parents[0].sha, cat: cat_id, "committer": parent_committer});
+      index_cc++;
+      console.log("Pushing link:","source", findNode(link.sha),"target", findNode(link.parents[0].sha))
+      graph["links"].push({"source":findNode(link.sha),"target":findNode(link.parents[0].sha)});
+  //console.log("findNodeTESTING:", findNode("267dff2672d73e4a2d527610aafd62803e9c8652"))
+
+})
+}
+// If parent already exists: 
+else{
+
+  //d3.json("https://api.github.com/repos/Caleydo/caleydo/commits/" + link.parents[0].sha, function(error, data_c){
+    //console.log("**data_c**", data_c)
+    //console.log("findNodecat(link.committer.id)", findNodecat(link.committer.id))
+    if(findNodecat(link.committer.id))
+      cat_id = findNodecat(link.committer.id)
+    else{
+      cat_id = index_cc
+      index_cc++;
+    }
+      console.log("Pushing link:","source", findNode(link.sha),"target", findNode(link.parents[0].sha))
+      graph["links"].push({"source":findNode(link.sha),"target":findNode(link.parents[0].sha)});
+  //console.log("findNodeTESTING:", findNode("267dff2672d73e4a2d527610aafd62803e9c8652"))
+
+
+}
+
+
+ // close for json ofor parent
+});
+
+
+console.log(graph.nodes)
+console.log(graph.links)
+
+
+// Generate the force layout
+var force = d3.layout.force()
+    .size([width, height])
+ .nodes(graph.nodes)
+    .links(graph.links)
+    .charge(-50)
+    .linkDistance(100)
+    //.on("tick", tick)
+    .on("start", function(d) {})
+    .on("end", function(d) {})
+
+console.log("links for path:::",graph.links)
+
+console.log("links for force.links():::",force.links())
+var path = svg.append("svg:g").selectAll("path")
+    .data(force.links())
+  .enter().append("svg:path")
+  .attr("d","M100,5L20,20L40,10L60,40L80,5L100,60")
+    //.attr("class", function(d) { return "link " + d.type; })
+    .attr("marker-end", "url(#end)");
+  
+
+function tick(d) {
+
+
+  graph_update(0);
+}
+
+function random_layout() {
+  
+  force.stop();
+
+  graph.nodes.forEach(function(d, i) {
+    d.x = width/4 + 2*width*Math.random()/4;
+    d.y = height/4 + 2*height*Math.random()/4;
+  })
+  
+  graph_update(500);
+}
+
+function force_layout() {
+ force.nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+      force.start()
+}
+
+function line_layout() {
+
+  force.stop();
+
+  graph.nodes.forEach(function(d, i) {
+    d.y = d.index ;
+  })
+
+  graph_update(500);
+}
+
+function line_cat_layout() {
+
+  force.stop();
+
+  graph.nodes.forEach(function(d, i) {
+    d.y = 100 + d.cat*10;
+  })
+
+  graph_update(500);
+}
+
+function radial_layout() {
+
+  force.stop();
+
+  var r = height/2;
+
+  var arc = d3.svg.arc()
+          .outerRadius(r);
+
+  var pie = d3.layout.pie()
+  .sort(function(a, b) { return a.cat - b.cat;})
+          .value(function(d, i) { return 1; }); // equal share for each point
+
+  graph.nodes = pie(graph.nodes).map(function(d, i) {
+    d.innerRadius = 0;
+    d.outerRadius = r;
+    d.data.x = arc.centroid(d)[0]+height/2;
+    d.data.y = arc.centroid(d)[1]+width/2;
+    d.data.endAngle = d.endAngle; 
+    d.data.startAngle = d.startAngle; 
+    return d.data;
+  })
+
+  graph_update(500);
+}
+
+function category_color() {
+  d3.selectAll("circle").transition().duration(500).style("fill", function(d) { return fill(d.cat); });
+}
+
+function category_size() {
+  d3.selectAll("circle").transition().duration(500).attr("r", function(d) { return Math.sqrt((d.cat+1)*10); });
+}
+
+function graph_update(delay) {
+//console.log("ingraph update")
+  link.transition().duration(delay)
+      .attr("x1", function(d) {  return d.target.x; })
+      .attr("y1", function(d) { return d.target.y; })
+      .attr("x2", function(d) { return d.source.x; })
+      .attr("y2", function(d) { return d.source.y; });
+
+  node.transition().duration(delay)
+      .attr("transform", function(d) { 
+        return "translate("+d.x+","+d.y+")"; 
+      });
+
+    /*node.append("text")
+    //.attr("class", "word")
+    .attr("dy", ".35em")
+    .attr("id", "tooltip")
+    .classed("word", true)
+    .text(function(d) {return d.name; })
+    */
+
+    //.style("opacity", 1e-6);
+    
+/*
+    node.on("mouseover", function(d,i){
+          console.log("d on mouseover",i)
+          svg.append("text")
+              .attr("x", 100)
+              .attr("y", 100)
+              .attr("fill", "black")
+              .attr("id", "tooltip")
+              .text(d.name
+                )
+          //d3.selectAll("text").classed("word", true)
+          //node.text(function(d) {return d.name; });
+          })
+
+    node.on("mouseout", function(d,i){
+          console.log("d on mouseout",i)
+          
+          //d3.selectAll("text").classed("word", false)
+          //d3.selectAll("node_" + i).style("opacity", 1);
+          //node.text(function(d) {return d.name; });
+          })
+
+
+*/
+node.on("mouseover", function(d) {
+            d3.select(this).style("fill", "#999");
+            svg.append("text")
+              .attr("x", 100)
+              .attr("y", 100)
+              .attr("fill", "black")
+              .attr("id", "tooltip")
+              .text(d.index + "name:" + d.repo_name)
+            //fade(.1);
+        })
+        .on("mouseout", function(d) {
+          d3.select("#tooltip").remove();
+            if (d.style == 'filled') {
+                d3.select(this).style("fill",d.color);fade(1);
+            } else {
+                d3.select(this).style("stroke",d.color);
+                d3.select(this).style("fill","black");
+            }
+            //fade(1);
+        })
+
+
+
+path.attr('d', function(d) {
+  console.log("TICK d", d)
+    var deltaX = d.target.x - d.source.x,
+        deltaY = d.target.y - d.source.y,
+        dist = Math.sqrt(deltaX * deltaX + deltaY * deltaY),
+        normX = deltaX / dist,
+        normY = deltaY / dist,
+        sourcePadding = d.left ? 17 : 12,
+        targetPadding = d.right ? 17 : 12,
+        sourceX = d.source.x + (sourcePadding * normX),
+        sourceY = d.source.y + (sourcePadding * normY),
+        targetX = d.target.x - (targetPadding * normX),
+        targetY = d.target.y - (targetPadding * normY);
+    return 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
+  });
+
+
+    }
+
+
+d3.select("input[value=\"force\"]").on("click", force_layout);
+d3.select("input[value=\"random\"]").on("click", random_layout);
+d3.select("input[value=\"line\"]").on("click", line_layout);
+d3.select("input[value=\"line_cat\"]").on("click", line_cat_layout);
+d3.select("input[value=\"radial\"]").on("click", radial_layout);
+
+d3.select("input[value=\"nocolor\"]").on("click", function() {
+  d3.selectAll("circle").transition().duration(500).style("fill", "#66CC66");
+})
+
+d3.select("input[value=\"color_cat\"]").on("click", category_color);
+
+d3.select("input[value=\"nosize\"]").on("click", function() {
+  d3.selectAll("circle").transition().duration(500).attr("r", 5);
+})
+
+d3.select("input[value=\"size_cat\"]").on("click", category_size);
+
+var link = svg.selectAll(".link")
+              .data(graph.links)
+            .enter().append("line")
+              .attr("class", "link")
+
+var node = svg.selectAll(".node")
+              .data(graph.nodes)
+            .enter()
+              .append("g")
+              //.attr("class", "node")
+              .style("fill", "#66CC66")
+              //.style("stroke", #000)
+              //.style("stroke-width", 1px)
+              .attr('class', function(d,i){ return "node_" + i; });
+
+node.append("circle")
+    .attr("r", 5)
+    node.on("mouseover", function(d) {
+  var pointing = links.filter(function(e) { return e.target == d; });
+});
+
+
+// build the arrow.
+svg.append("svg:defs").selectAll("marker")
+    .data(["end"])      // Different link/path types can be defined here
+  .enter().append("svg:marker")    // This section adds in the arrows
+    .attr("id", String)
+    .attr("viewBox", "0 -5 10 10")
+    .attr("refX", 15)
+    .attr("refY", -1.5)
+    .attr("markerWidth", 6)
+    .attr("markerHeight", 6)
+    .attr("orient", "auto")
+  .append("svg:path")
+    .attr("d", "M0,-5L10,0L0,5");
+
+// add the links and the arrows
+
+
+
+
+
+
+//console.log("calling forcea=layout")
+force_layout();
+
+      force.start()
+})
+/*
+})
+})
+*/ 
+
+</script>
+</body>
+</html>
