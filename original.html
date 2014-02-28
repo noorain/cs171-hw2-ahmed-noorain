@@ -63,8 +63,16 @@ var findNode = function (name) {
         for (var i in graph["nodes"]) if (graph["nodes"][i]["name"] === name) return graph["nodes"][i];
     }
 
+
+d3.json("https://api.github.com/repos/mbostock/d3/branches?&client_id=940b2dea8183973b6212&client_secret=543f8aabfca15adf2070b7ff49530b4200da6e38", function(error, d1){
+  d1.forEach(function(branch) {
+    data = branch
+    console.log("branch", branch)
+  
+ 
+
 // Read data for a specific branch, this closes at end of the script.
-d3.json("https://api.github.com/repos/mbostock/d3/commits?per_page=20&sha=adopt&client_id=940b2dea8183973b6212&client_secret=543f8aabfca15adf2070b7ff49530b4200da6e38", function(error, mainlink){
+d3.json("https://api.github.com/repos/mbostock/d3/commits?per_page=2&sha="+ branch.name + "&client_id=940b2dea8183973b6212&client_secret=543f8aabfca15adf2070b7ff49530b4200da6e38", function(error, mainlink){
 
 var width = 9000,
     height = 900;
@@ -95,6 +103,7 @@ var findNode = function (name) {
 
 
 mainlink.forEach(function(link) {
+  console.log("YES WE CAN ACCESS BRANCH NAME HERE:" , branch.name)
   console.log("Linking:", link.sha, " with ", link.parents[0].sha)
   console.log("Dealing with left node")
   if(!findNode(link.sha)){
@@ -116,7 +125,10 @@ mainlink.forEach(function(link) {
   graph["links"].push({"source":findNode(link.sha),"target":findNode(link.parents[0].sha)});
   //console.log("links:", graph.links)
 
-});
+});  // end of  mainlink.forEach(function(link)
+
+
+
 
 //console.log("Distinct Values", graph["nodes"])
  // console.log("links:", graph.links)
@@ -392,7 +404,8 @@ force_layout();
 radial_layout()
 line_cat_layout() 
 
-
+});
+}) // end of d1.forEach(function(branch)
 
 })
 
